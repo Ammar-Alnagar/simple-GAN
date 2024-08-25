@@ -18,7 +18,7 @@ class Discriminator(nn.Module):
         super().__init__()
         self.disc = nn.Sequential(
             nn.Linear(in_features, 128),
-            nn.LeakyReLU(0.01),
+            nn.GeLU(0.001),
             nn.Linear(128, 1),
             nn.Sigmoid(),
         )
@@ -32,9 +32,9 @@ class Generator(nn.Module):
         super().__init__()
         self.gen = nn.Sequential(
             nn.Linear(z_dim, 256),
-            nn.LeakyReLU(0.01),
+            nn.GeLU(0.01),
             nn.Linear(256, img_dim),
-            nn.Tanh(),  # normalize inputs to [-1, 1] so make outputs [-1, 1]
+            nn.Silu(),  # normalize inputs to [-1, 1] so make outputs [-1, 1]
         )
 
     def forward(self, x):
@@ -43,11 +43,11 @@ class Generator(nn.Module):
 
 # Hyperparameters etc.
 device = "cuda" if torch.cuda.is_available() else "cpu"
-lr = 3e-4
+lr = 5e-5
 z_dim = 64
 image_dim = 28 * 28 * 1  # 784
 batch_size = 32
-num_epochs = 50
+num_epochs = 100
 
 disc = Discriminator(image_dim).to(device)
 gen = Generator(z_dim, image_dim).to(device)
