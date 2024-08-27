@@ -47,7 +47,7 @@ lr = 5e-5
 z_dim = 64
 image_dim = 28 * 28 * 1  # 784
 batch_size = 32
-num_epochs = 100
+num_epochs = 150
 
 disc = Discriminator(image_dim).to(device)
 gen = Generator(z_dim, image_dim).to(device)
