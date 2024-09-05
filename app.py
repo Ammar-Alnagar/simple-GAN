@@ -27,6 +27,7 @@ class Discriminator(nn.Module):
         return self.disc(x)
 
 
+
 class Generator(nn.Module):
     def __init__(self, z_dim, img_dim):
         super().__init__()
