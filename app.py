@@ -10,6 +10,7 @@ from torch.utils.data import DataLoader
 import torchvision.transforms as transforms
 from torch.utils.tensorboard import SummaryWriter  # to print to tensorboard
 
+
 class Discriminator(nn.Module):
     def __init__(self, in_features):
         super().__init__()
